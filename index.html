@@ -66,11 +66,12 @@ fetch ('https://script.google.com/macros/s/AKfycbxbIfYpT6ygPqIg02e24Vt8QVvFLn9Z4
 }
 
 function  mapFunction(players){
- console.log("getPlayers players###########", players.data);
+ console.log("getPlayers players##------------####", players.data);
   let playerList = players.data.map((item) =>{
+  console.log(moment(item[4]).format("dd-M-yyyy"));
   return(item[0]);
   })
-  console.log(moment(playerList[4]).format("dd-M-yyyy"));
+  
   console.log(players.data);
 }
 
