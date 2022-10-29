@@ -70,6 +70,7 @@ function  mapFunction(players){
   let playerList = players.data.map((item) =>{
   return(item[0]);
   })
+  console.log(moment(playerList[4]).format("dd-M-yyyy"));
   console.log(players.data);
 }
 
