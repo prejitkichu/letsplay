@@ -1,150 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>letsPlay</title>
+  <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script> 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script> 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-  <style>
-    #pname, #pmobile{
-      border: none;
-      margin: 0px;
-    }
-  </style>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
 <div class="container">
-  
+  <h1>Let'sPlay</h1> 
   <div class="container">
-    
     <div class="row">
-      
-      <div class="col col-sm-6">
-        <h5 class="pt-3">Let's Play</h5> 
-        <form id="myForm1">			 		 		
-          <div class="form-group">       
-            <input type="text" class="form-control form-control-sm" id="name" placeholder="Enter Name" name="name">
-          </div>
-      
-          <div class="form-group">       
-              <input type="text" class="form-control form-control-sm" id="mobile" placeholder="Enter Mobile" name="mobile">
-            </div>
-           
-          <button type="button" class="btn btn-primary btn-sm" onclick="signup()" >Sign up</button>
-        </form>
-        
-
-        <form id="myForm2">	
-          <div class="row">
-          <div class="col form-group">       
-            <p   class="form-control form-control-sm" id="pname"   > </p>    
-          </div>
-          <div class="col form-group">       
-            <p   class="form-control form-control-sm" id="pmobile" > </p>    
-          </div>
-        </div>		 		 		
-          
-        <div class="row">
-          <div class="col form-group">       
-              <input type="text" class="form-control form-control-sm" id="date" placeholder="Enter Date" name="date"readOnly  >     
-            </div>
-            
-          <div class="col form-group form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" id="amount" type="checkbox" value="125" name="amount" checked disabled> ground fee-<b><em>125</em></b>
-            </label>
-          </div>
-        </div>
-          <button type="button" class="btn btn-primary btn-sm" onclick="playingDay()" >Make IN</button>
-        </form>
-
+      <div class="col-md-6">
+        <form id="myForm">			 		 		
+		<div class="form-group">       
+      <input type="text" class="form-control" id="name" placeholder="Enter Name" name="name">
+    </div>
+	<div class="form-group">       
+      <input type="text" class="form-control" id="position" placeholder="Enter position" name="position">
+    </div>
+	<div class="form-group">       
+      <input type="text" class="form-control" id="mobile" placeholder="Enter Mobile" name="mobile">
+    </div>
+	<div class="form-group">       
+      <input type="date" class="form-control" id="date" placeholder="Enter Date" name="date">
+    </div>
+    <div class="form-group">      
+      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+    </div>
+	
+	<div class="form-group">       
+      <input type="text" class="form-control" id="amount" value="125" placeholder="125" name="amount">
+    </div>
+    
+    <div class="form-group form-check">
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox" name="remember"> Remember me
+      </label>
+    </div>
+    <button type="button" class="btn btn-primary" onclick="myFunction()" >Submit</button>
+  </form>
       </div>
-     
+      <div class="col-md-6 ">
+	  <button type="button" class="btn btn-primary" onclick="getPlayers()" >Get Players</button>
+	  </div>
     </div>
   </div>
 </div>
 <script>
-  var userData =  JSON.parse(localStorage.getItem('user'));
-  let user ={};
-  function showElement(form1, form2){
-  document.getElementById("myForm1").style.display = form1;
-  document.getElementById("myForm2").style.display = form2; 
-  
-  }
-  
-  $(function() {
-    $('#date').datepicker({format:'dd-M-yyyy', todayHighlight: true, autoclose: true, startDate: new Date(),
-        
-    });
-    $("#date").on("change",function (e){       
-    user.date = e.target.value;
-    user.amount = document.getElementById("amount").value;
-    
-  });
+let players ;
+function getPlayers(){
 
-  
-});
+fetch ('https://script.google.com/macros/s/AKfycbxbIfYpT6ygPqIg02e24Vt8QVvFLn9Z4gb0zwUVlTkeB9BHOaraPnzfwPMQxFt4gQg/exec')
+.then(x => x.text())
+.then(y =>{
+ players =y;
+ mapFunction(JSON.parse(players));
+ });
 
-if(Object.keys(userData).length > 0){  
-  user= {
-name: userData.name, 
-mobile:userData.mobile, 
-  };
-  document.getElementById("pname").innerHTML =userData.name;
-   document.getElementById("pmobile").innerHTML=userData.mobile;
-   
-  showElement("none", "block");
-}else{
-  showElement("block", "none");
-  function  signup(){ 
-      if((document.getElementById("name").value.trim()==='') && (document.getElementById("mobile").value ===''))
-      {alert("Name and date are required"); return }
-      showElement("none", "block"); 
-  user= {
-name: document.getElementById("name").value, 
-mobile:document.getElementById("mobile").value,   
-};
-document.getElementById("pname").innerHTML =user.name;
-   document.getElementById("pmobile").innerHTML=user.mobile;
 
-// user= {
-// name: document.getElementById("name").value, 
-// mobile:document.getElementById("mobile").value,  
-// date:document.getElementById("date").value,  
-// amount:document.getElementById("amount").value,
-// };
-
-localStorage.setItem('user', JSON.stringify(user));
-console.log('user', user)
-  }
 }
 
-
-async function playingDay(){
-  if(document.getElementById("date").value === '')
- { alert('select date' ); return;}
-
- let data= {
-name: user.name, 
-position:"tex",
-mobile:user.mobile,  
-email:"test@test.com",
-date: user.date,  
-amount:user.amount, 
-};
-
- 
-console.log(data); 
+function  mapFunction(players){
+ console.log("getPlayers players##------------####", players.data);
+  let playerList = players.data.map((item) =>{
+  console.log(moment(item[4]).format("dd-M-yyyy"));
+  return(item[0]);
+  })
   
-let url='https://script.google.com/macros/s/AKfycbxkugc3tVR1s0dmoNQSdrRSht-kY1DwlHvQEInysuCj1A_K48xRXaFhOMAB2Pe_Bi_L/exec?action=addUser'
+  console.log(players.data);
+}
+
  
+// Example POST method implementation:
+async function myFunction() { 
+let url='https://script.google.com/macros/s/AKfycbwI2zfcVQAQzX-vPIEhl9dMWINPrL2O0ux4m1OcYx9_PAHC_1EP9fiHUwcYCiybdLeC/exec?action=addUser'
+ 
+let data= {
+name: document.getElementById("name").value, 
+position:document.getElementById("position").value,
+mobile:document.getElementById("mobile").value,  
+email:document.getElementById("email").value,
+date:document.getElementById("date").value,  
+amount:document.getElementById("amount").value, 
+};
   // Default options are marked with *
   const response = await fetch(url, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -161,11 +104,10 @@ let url='https://script.google.com/macros/s/AKfycbxkugc3tVR1s0dmoNQSdrRSht-kY1Dw
   });
   console.log('response', response.status);
   if(response.status===0) {
-  document.getElementById("date").value=''; 
+  document.getElementById("myForm").reset(); 
   }
 
   return response; // parses JSON response into native JavaScript objects
-
 }
 
  
