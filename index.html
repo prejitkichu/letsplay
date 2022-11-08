@@ -55,7 +55,7 @@
 let players ;
 function getPlayers(){
 
-fetch ('https://script.google.com/macros/s/AKfycbxbIfYpT6ygPqIg02e24Vt8QVvFLn9Z4gb0zwUVlTkeB9BHOaraPnzfwPMQxFt4gQg/exec')
+fetch ('https://script.google.com/macros/s/AKfycbzOHmlCnXrMBqndCLe8_zdq9RcrNkzgnODWDO6yIQ05ZfKfoMkHqa8suUnOI_U0wHkB/exec')
 .then(x => x.text())
 .then(y =>{
  players =y;
@@ -66,7 +66,7 @@ fetch ('https://script.google.com/macros/s/AKfycbxbIfYpT6ygPqIg02e24Vt8QVvFLn9Z4
 }
 
 function  mapFunction(players){
- console.log("getPlayers players##------------####", players.data);
+ console.log("getPlayers players##- 123454321---####", players.data);
   let playerList = players.data.map((item) =>{
   console.log(moment(item[4]).format("dd-M-yyyy"));
   return(item[0]);
@@ -78,7 +78,7 @@ function  mapFunction(players){
  
 // Example POST method implementation:
 async function myFunction() { 
-let url='https://script.google.com/macros/s/AKfycbwI2zfcVQAQzX-vPIEhl9dMWINPrL2O0ux4m1OcYx9_PAHC_1EP9fiHUwcYCiybdLeC/exec?action=addUser'
+let url='https://script.google.com/macros/s/AKfycbzOHmlCnXrMBqndCLe8_zdq9RcrNkzgnODWDO6yIQ05ZfKfoMkHqa8suUnOI_U0wHkB/exec?action=addUser'
  
 let data= {
 name: document.getElementById("name").value, 
