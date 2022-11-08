@@ -55,7 +55,7 @@
 let players ;
 function getPlayers(){
 
-fetch ('https://script.google.com/macros/s/AKfycbzOHmlCnXrMBqndCLe8_zdq9RcrNkzgnODWDO6yIQ05ZfKfoMkHqa8suUnOI_U0wHkB/exec')
+fetch ('https://script.google.com/macros/s/AKfycbyppKMJMyVO25inYVE4nqz_ibBPqMtM8G_il_OnY1rMHza_85An7-dTX4tud7KzX928/exec')
 .then(x => x.text())
 .then(y =>{
  players =y;
@@ -78,7 +78,7 @@ function  mapFunction(players){
  
 // Example POST method implementation:
 async function myFunction() { 
-let url='https://script.google.com/macros/s/AKfycbzOHmlCnXrMBqndCLe8_zdq9RcrNkzgnODWDO6yIQ05ZfKfoMkHqa8suUnOI_U0wHkB/exec?action=addUser'
+let url='https://script.google.com/macros/s/AKfycbyppKMJMyVO25inYVE4nqz_ibBPqMtM8G_il_OnY1rMHza_85An7-dTX4tud7KzX928/exec?action=addUser'
  
 let data= {
 name: document.getElementById("name").value, 
